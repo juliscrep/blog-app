@@ -1,10 +1,17 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions, Session, User } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
+import { JWT } from "next-auth/jwt";
 
 const prisma = new PrismaClient();
+
+interface CustomSession extends Session {
+  user: {
+    id: string;
+  } & Session["user"];
+}
 
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -22,22 +29,22 @@ const handler = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: JWT; user?: User }) {
       if (user?.id) {
         token.id = user.id;
       }
       return token;
     },
-    async session({ session, token }) {
-      const sessionWithId = session as any;
-      if (sessionWithId.user) {
-        sessionWithId.user.id = token.id;
+    async session({ session, token }: { session: Session; token: JWT }) {
+      const customSession = session as CustomSession;
+      if (customSession.user) {
+        customSession.user.id = token.id as string;
       }
-      return session;
+      return customSession;
     },
   },
   secret: process.env.AUTH_GITHUB_SECRET as string,
   debug: true,
-});
+} as NextAuthOptions);
 
 export { handler as GET, handler as POST };

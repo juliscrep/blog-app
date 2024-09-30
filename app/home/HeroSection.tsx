@@ -1,9 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 
-type Props = {}
 
-const HeroSection = (props: Props) => {
+const HeroSection = () => {
   return (
     <section className='grid grid-cols-1 sm:grid-cols-12 mt-6'>
         <div className='col-span-7 w-full place-self-center text-center sm:text-left justify-self-start'>

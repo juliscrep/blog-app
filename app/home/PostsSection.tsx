@@ -4,9 +4,7 @@ import PostCard from './PostCard'
 
 const prisma = new PrismaClient()
 
-type Props = {}
-
-const PostsSection = async (props: Props) => {
+const PostsSection = async () => {
   
     const posts = await prisma.post.findMany()
     

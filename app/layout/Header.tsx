@@ -5,9 +5,8 @@ import Link from 'next/link'
 import { Button as AuthButton } from '../auth/button'
 import { SessionProvider } from 'next-auth/react'
 
-type Props = {}
 
-const Header = (props: Props) => {
+const Header = () => {
   return (
     <SessionProvider>
     <div className='border-b flex justify-between'>
