@@ -4,9 +4,7 @@ import React from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link';
 
-type Props = {}
-
-export const Button = (props: Props) => {
+export const Button = () => {
   const { data: session, status } = useSession()
 
   if (status === 'loading') {
