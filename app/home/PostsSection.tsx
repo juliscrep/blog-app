@@ -17,8 +17,8 @@ const PostsSection = async (props: Props) => {
     ]
   return (
     <div>
-        <h1 className='text-4xl text-center mt-6'>Trending</h1>
-        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 mb-10'>
+        <h1 className='text-5xl text-center mt-6'>Trending</h1>
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 mb-16'>
             {
                 posts.map((post, index) => (
                     <PostCard key={post.id} post={post} className={bgClasses[index]}/>
