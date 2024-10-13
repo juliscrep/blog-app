@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  mode: 'jit',
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -14,7 +15,7 @@ const config: Config = {
         sm: "600px",
         md: "728px",
         lg: "984px",
-        xl: "1240",
+        xl: "1240px",
         "2xl": "1300px",
 
       },
